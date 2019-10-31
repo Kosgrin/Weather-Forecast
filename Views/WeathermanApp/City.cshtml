@@ -1,0 +1,85 @@
+﻿@model Weatherman.Models.ViewModel.CustomViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+@{
+    ViewData["Title"] = "City";
+}
+
+    <div class="container">
+
+        <div class="container">
+
+            <div class="form-group col-md-offset-3 col-md-5">
+
+                <h2>Погода в @Model.City.Name:</h2>
+
+                <label asp-for="City.Name"></label>
+                <span class="badge">@Model.City.Name</span>
+                <br />
+
+                <label asp-for="City.Temperature"></label>
+                <span class="badge">@Model.City.Temperature °C</span>
+                <br />
+
+                <label asp-for="City.Humidity"></label>
+                <span class="badge">@Model.City.Humidity %</span>
+                <br />
+
+                <label asp-for="City.Pressure"></label>
+                <span class="badge">@Model.City.Pressure Hpa</span>
+                <br />
+
+                <label asp-for="City.Wind"></label>
+                <span class="badge">@Model.City.Wind Km/h</span>
+                <br />
+
+                <label asp-for="City.Weather"></label>
+                <span class="badge">@Model.City.Weather </span> <img src="//openweathermap.org/img/wn/@Model.City.Image" alt="forecast" width="50" height="50">
+
+
+                <img @Model.City.Image />
+
+                <button class="btn btn-success" style="margin:auto" id="clickme">
+                    показать прогноз на каждые 3 часа
+                </button>
+
+            </div>
+
+        </div>
+
+        
+        
+        <div id="forecast" style="display:none">
+            <partial name="CityForecast" />
+        </div>
+            
+        
+
+
+
+        <div class="container">
+
+            <div class="form-group col-md-offset-3 col-md-5">
+
+                <form method="get">
+                    <button asp-controller="WeathermanApp" asp-action="SearchCity" class="btn btn-success">Назад</button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <script>
+        $( "#clickme" ).click(function() {
+  $( "#forecast" ).toggle( "slow", function() {
+    
+  });
+});
+    </script>
